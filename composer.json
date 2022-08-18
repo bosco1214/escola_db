@@ -1,0 +1,11 @@
+{
+    "name": "escola_db/php",
+        "autoload": {
+            "psr-4": {
+                "app\\" : "app/"
+            },
+            "files": [
+                "app/config/config.php"
+            ]
+        }
+}
