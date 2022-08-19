@@ -81,5 +81,16 @@ class Alunos extends Pages{
         self::render('alunos/editar-cadastro', $dados);
     }
 
+    public function editarCad(){
+        try {
+            AlunosMd::update($_POST);
+            echo '<script>alert("Registro alterado com sucesso!");</script>';
+            echo '<script>location.href=" ' . URL . '/alunos/pesquisarAluno/ "</script>';
+        } catch (\PDOException $e) {
+            echo '<script>alert(" '.$e->getMessage().' ");</script>';
+            echo '<script>location.href=" ' . URL . '/alunos/pesquisarAluno/ "</script>';
+        }
+    }
+
 
 }

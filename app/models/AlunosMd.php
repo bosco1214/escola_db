@@ -181,15 +181,61 @@ class AlunosMd {
 
     public static function getIdAluno($id,$table){
 
-        $sql = "SELECT * FROM ' . $table . ' WHERE id = :id";
+        $idCad = $id;
+
+        $sql = 'SELECT * FROM ' . $table . ' WHERE id = :id';
 
         $con = Connection::getConnection();
 
         $query = $con->prepare($sql);
-        $query->bindValue(':id',$id);
+        $query->bindValue(':id',$idCad);
         $query->execute();
         $resultado = $query->fetchAll(\PDO::FETCH_ASSOC);
         return $resultado;
+    }
+
+    public static function update(){
+
+        $id = filter_input(INPUT_POST, 'id', FILTER_SANITIZE_SPECIAL_CHARS);
+        $nome = mb_strtoupper(filter_input(INPUT_POST, 'nomedoaluno', FILTER_SANITIZE_SPECIAL_CHARS ));
+        $sexo = mb_strtoupper(filter_input(INPUT_POST, 'sexo', FILTER_SANITIZE_SPECIAL_CHARS ));
+        $datadenasc = mb_strtoupper(filter_input(INPUT_POST, 'datadenasc', FILTER_SANITIZE_SPECIAL_CHARS ));
+        $cor_raca = mb_strtoupper(filter_input(INPUT_POST, 'cor_raca', FILTER_SANITIZE_SPECIAL_CHARS ));
+        $nomedamae = mb_strtoupper(filter_input(INPUT_POST, 'nomedamae', FILTER_SANITIZE_SPECIAL_CHARS ));
+        $nomedopai = mb_strtoupper(filter_input(INPUT_POST, 'nomedopai', FILTER_SANITIZE_SPECIAL_CHARS ));
+        $nee = filter_input(INPUT_POST, 'nee', FILTER_SANITIZE_SPECIAL_CHARS );
+        $tipo_nee = filter_input(INPUT_POST, 'tipo_nee', FILTER_SANITIZE_SPECIAL_CHARS );
+        $nacionalidade = filter_input(INPUT_POST, 'nacionalidade', FILTER_SANITIZE_SPECIAL_CHARS );
+        $naturalidade = mb_strtoupper(filter_input(INPUT_POST, 'naturalidade', FILTER_SANITIZE_SPECIAL_CHARS ));
+        $data_cadastro = date('Y-m-d');
+        $data_alteracao = date('Y-m-d');
+
+        $sql = "UPDATE alunos SET nome = :nome, sexo = :sexo, datadenasc = :datadenasc, cor_raca = :cor_raca, nomedamae = :nomedamae, nomedopai = :nomedopai, nee = :nee, tipo_nee = :tipo_nee, nacionalidade = :nacionalidade, naturalidade = :naturalidade, data_cadastro = :data_cadastro, data_alteracao = :data_alteracao WHERE id = :id";
+
+        $con = Connection::getConnection();
+
+        $query = $con->prepare($sql);
+        $query->bindValue(':nome', $nome);
+        $query->bindValue(':datadenasc', $datadenasc);
+        $query->bindValue(':sexo', $sexo);
+        $query->bindValue(':nomedamae', $nomedamae);
+        $query->bindValue(':nomedopai', $nomedopai);
+        $query->bindValue(':nee', $nee);
+        $query->bindValue(':tipo_nee', $tipo_nee);
+        $query->bindValue(':nacionalidade', $nacionalidade);
+        $query->bindValue(':naturalidade', $naturalidade);
+        $query->bindValue(':cor_raca', $cor_raca);
+        $query->bindValue(':data_cadastro', $data_cadastro);
+        $query->bindValue(':data_alteracao', $data_alteracao);
+        $query->bindValue(':id', $id);
+        $res = $query->execute();
+
+        if(!$res){
+            throw new \PDOException("Falha na gravação");
+            return false;
+        }else{
+            return true;
+        }
     }
 
 }
