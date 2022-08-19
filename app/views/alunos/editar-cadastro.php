@@ -5,7 +5,7 @@
     <form action="<?= URL ?>/alunos/editarCad/" method="post">
         <div class="row">
             <div class="col-md-6">
-                <input type="hidden" name="id" id="id" value="<?= $id ?>">
+                <input type="hidden" name="id" id="id" value="<?= $row['id'] ?>">
                 <label for="nomedoaluno">Nome do aluno</label>
                 <input class="form-control" type="text" name="nomedoaluno" id="nomedoaluno" value="<?= $row['nome'] ?>" required>
             </div>
@@ -62,6 +62,17 @@
             <div class="col-md-3">
                 <label for="naturalidade">Naturalidade-UF</label>
                 <input class="form-control" type="text" name="naturalidade" id="naturalidade" value="<?= $row['naturalidade'] ?>">
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-3">
+                <label for="data_cadastro">Data do cadastro</label>
+                <input class="form-control" type="date" name="data_cadastro" id="data_cadastro" value="<?= $row['data_cadastro'] ?>">
+            </div>
+            <div class="col-md-3">
+                <label for="data_alteracao">Data da alteração</label>
+                <input class="form-control" type="date" name="data_alteracao" id="data_alteracao" value="<?= $row['data_alteracao'] ?>">
             </div>
         </div>
 

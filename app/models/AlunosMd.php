@@ -194,7 +194,7 @@ class AlunosMd {
         return $resultado;
     }
 
-    public static function update(){
+    public static function updateCad(){
 
         $id = filter_input(INPUT_POST, 'id', FILTER_SANITIZE_SPECIAL_CHARS);
         $nome = mb_strtoupper(filter_input(INPUT_POST, 'nomedoaluno', FILTER_SANITIZE_SPECIAL_CHARS ));
@@ -207,10 +207,10 @@ class AlunosMd {
         $tipo_nee = filter_input(INPUT_POST, 'tipo_nee', FILTER_SANITIZE_SPECIAL_CHARS );
         $nacionalidade = filter_input(INPUT_POST, 'nacionalidade', FILTER_SANITIZE_SPECIAL_CHARS );
         $naturalidade = mb_strtoupper(filter_input(INPUT_POST, 'naturalidade', FILTER_SANITIZE_SPECIAL_CHARS ));
-        $data_cadastro = date('Y-m-d');
+        //$data_cadastro = date('Y-m-d');
         $data_alteracao = date('Y-m-d');
 
-        $sql = "UPDATE alunos SET nome = :nome, sexo = :sexo, datadenasc = :datadenasc, cor_raca = :cor_raca, nomedamae = :nomedamae, nomedopai = :nomedopai, nee = :nee, tipo_nee = :tipo_nee, nacionalidade = :nacionalidade, naturalidade = :naturalidade, data_cadastro = :data_cadastro, data_alteracao = :data_alteracao WHERE id = :id";
+        $sql = "UPDATE alunos SET nome = :nome, sexo = :sexo, datadenasc = :datadenasc, cor_raca = :cor_raca, nomedamae = :nomedamae, nomedopai = :nomedopai, nee = :nee, tipo_nee = :tipo_nee, nacionalidade = :nacionalidade, naturalidade = :naturalidade, data_alteracao = :data_alteracao WHERE id = :id";
 
         $con = Connection::getConnection();
 
@@ -225,7 +225,7 @@ class AlunosMd {
         $query->bindValue(':nacionalidade', $nacionalidade);
         $query->bindValue(':naturalidade', $naturalidade);
         $query->bindValue(':cor_raca', $cor_raca);
-        $query->bindValue(':data_cadastro', $data_cadastro);
+        //$query->bindValue(':data_cadastro', $data_cadastro);
         $query->bindValue(':data_alteracao', $data_alteracao);
         $query->bindValue(':id', $id);
         $res = $query->execute();
