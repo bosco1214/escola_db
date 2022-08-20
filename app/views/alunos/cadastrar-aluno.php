@@ -20,7 +20,7 @@
                 <input class="form-control" type="date" name="datadenasc" id="datadenasc" maxlength="10" required>
             </div>
             <div class="col-md-2">
-                <label for="cor_raca">Cor/Raça</label>
+                <label for="cor_raca">Cor-Raça</label>
                 <select name="cor_raca" id="cor_raca" class="form-control">
                     <option value="NAO DECLARADA">NAO DECLARADA</option>
                 </select>
