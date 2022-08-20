@@ -56,14 +56,14 @@ class AlunosMd {
         $cpf_aluno = mb_strtoupper(filter_input(INPUT_POST, 'cpf_aluno', FILTER_SANITIZE_SPECIAL_CHARS ));
         $contato1 = mb_strtoupper(filter_input(INPUT_POST, 'contato1', FILTER_SANITIZE_SPECIAL_CHARS ));
         $contato2 = mb_strtoupper(filter_input(INPUT_POST, 'contato2', FILTER_SANITIZE_SPECIAL_CHARS ));
-        $email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_SPECIAL_CHARS );
-        $endereco = filter_input(INPUT_POST, 'endereco', FILTER_SANITIZE_SPECIAL_CHARS );
-        $bairro = filter_input(INPUT_POST, 'bairro', FILTER_SANITIZE_SPECIAL_CHARS );
-        $cep = filter_input(INPUT_POST, 'cep', FILTER_SANITIZE_SPECIAL_CHARS );
-        $cidade = filter_input(INPUT_POST, 'cidade', FILTER_SANITIZE_SPECIAL_CHARS );
-        $transp = filter_input(INPUT_POST, 'transp', FILTER_SANITIZE_SPECIAL_CHARS );
-        $bolsa = filter_input(INPUT_POST, 'bolsa', FILTER_SANITIZE_SPECIAL_CHARS );
-        $nis = filter_input(INPUT_POST, 'nis', FILTER_SANITIZE_SPECIAL_CHARS );
+        $email = mb_strtolower(filter_input(INPUT_POST, 'email', FILTER_SANITIZE_SPECIAL_CHARS ));
+        $endereco = mb_strtoupper(filter_input(INPUT_POST, 'endereco', FILTER_SANITIZE_SPECIAL_CHARS ));
+        $bairro = mb_strtoupper(filter_input(INPUT_POST, 'bairro', FILTER_SANITIZE_SPECIAL_CHARS ));
+        $cep = mb_strtoupper(filter_input(INPUT_POST, 'cep', FILTER_SANITIZE_SPECIAL_CHARS ));
+        $cidade = mb_strtoupper(filter_input(INPUT_POST, 'cidade', FILTER_SANITIZE_SPECIAL_CHARS ));
+        $transp = mb_strtoupper(filter_input(INPUT_POST, 'transp', FILTER_SANITIZE_SPECIAL_CHARS ));
+        $bolsa = mb_strtoupper(filter_input(INPUT_POST, 'bolsa', FILTER_SANITIZE_SPECIAL_CHARS ));
+        $nis = mb_strtoupper(filter_input(INPUT_POST, 'nis', FILTER_SANITIZE_SPECIAL_CHARS ));
         $cart_sus = filter_input(INPUT_POST, 'cart_sus', FILTER_SANITIZE_SPECIAL_CHARS );
 
         $sql = "INSERT INTO dados_aluno (idaluno,certidao,rg_aluno,cpf_aluno,contato1,contato2,email,endereco,bairro,cep,cidade,transpescolar,bolsafamilia,nis,cartaosus) VALUES (:idaluno,:certidao,:rg_aluno,:cpf_aluno,:contato1,:contato2,:email,:endereco,:bairro,:cep,:cidade,:transpescolar,:bolsafamilia,:nis,:cartaosus)";
@@ -179,7 +179,7 @@ class AlunosMd {
         }
     }
 
-    public static function getIdAluno($id,$table){
+    public static function getId($id,$table){
 
         $idCad = $id;
 
@@ -189,6 +189,21 @@ class AlunosMd {
 
         $query = $con->prepare($sql);
         $query->bindValue(':id',$idCad);
+        $query->execute();
+        $resultado = $query->fetchAll(\PDO::FETCH_ASSOC);
+        return $resultado;
+    }
+
+    public static function getIdAluno($id,$table){
+
+        $idCad = $id;
+
+        $sql = 'SELECT * FROM ' . $table . ' WHERE idaluno = :idaluno';
+
+        $con = Connection::getConnection();
+
+        $query = $con->prepare($sql);
+        $query->bindValue(':idaluno',$idCad);
         $query->execute();
         $resultado = $query->fetchAll(\PDO::FETCH_ASSOC);
         return $resultado;
@@ -236,6 +251,107 @@ class AlunosMd {
         }else{
             return true;
         }
+    }
+
+    public static function updateDados(){
+
+        $id = filter_input(INPUT_POST,'idaluno', FILTER_SANITIZE_SPECIAL_CHARS);
+        $certidao = mb_strtoupper(filter_input(INPUT_POST, 'certidao', FILTER_SANITIZE_SPECIAL_CHARS ));
+        $rg_aluno = mb_strtoupper(filter_input(INPUT_POST, 'rg_aluno', FILTER_SANITIZE_SPECIAL_CHARS ));
+        $cpf_aluno = mb_strtoupper(filter_input(INPUT_POST, 'cpf_aluno', FILTER_SANITIZE_SPECIAL_CHARS ));
+        $contato1 = mb_strtoupper(filter_input(INPUT_POST, 'contato1', FILTER_SANITIZE_SPECIAL_CHARS ));
+        $contato2 = mb_strtoupper(filter_input(INPUT_POST, 'contato2', FILTER_SANITIZE_SPECIAL_CHARS ));
+        $email = mb_strtolower(filter_input(INPUT_POST, 'email', FILTER_SANITIZE_SPECIAL_CHARS ));
+        $endereco = mb_strtoupper(filter_input(INPUT_POST, 'endereco', FILTER_SANITIZE_SPECIAL_CHARS ));
+        $bairro = mb_strtoupper(filter_input(INPUT_POST, 'bairro', FILTER_SANITIZE_SPECIAL_CHARS ));
+        $cep = mb_strtoupper(filter_input(INPUT_POST, 'cep', FILTER_SANITIZE_SPECIAL_CHARS ));
+        $cidade = mb_strtoupper(filter_input(INPUT_POST, 'cidade', FILTER_SANITIZE_SPECIAL_CHARS ));
+        $transp = mb_strtoupper(filter_input(INPUT_POST, 'transp', FILTER_SANITIZE_SPECIAL_CHARS ));
+        $bolsa = mb_strtoupper(filter_input(INPUT_POST, 'bolsa', FILTER_SANITIZE_SPECIAL_CHARS ));
+        $nis = mb_strtoupper(filter_input(INPUT_POST, 'nis', FILTER_SANITIZE_SPECIAL_CHARS ));
+        $cart_sus = mb_strtoupper(filter_input(INPUT_POST, 'cart_sus', FILTER_SANITIZE_SPECIAL_CHARS ));
+
+        $sql = "UPDATE dados_aluno SET certidao = :certidao, rg_aluno = :rg_aluno, cpf_aluno = :cpf_aluno, contato1 = :contato1, contato2 = :contato2, email = :email, endereco = :endereco, bairro = :bairro, cep = :cep, cidade = :cidade, transpescolar = :transpescolar, bolsafamilia = :bolsafamilia, nis = :nis, cartaosus = :cartaosus WHERE idaluno = :idaluno";
+
+        $con = Connection::getConnection();
+
+        $query = $con->prepare($sql);
+        $query->bindValue(':certidao', $certidao);
+        $query->bindValue(':rg_aluno', $rg_aluno);
+        $query->bindValue(':cpf_aluno', $cpf_aluno);
+        $query->bindValue(':contato1', $contato1);
+        $query->bindValue(':contato2', $contato2);
+        $query->bindValue(':email', $email);
+        $query->bindValue(':endereco', $endereco);
+        $query->bindValue(':bairro', $bairro);
+        $query->bindValue(':cep', $cep);
+        $query->bindValue(':cidade', $cidade);
+        $query->bindValue(':transpescolar', $transp);
+        $query->bindValue(':bolsafamilia', $bolsa);
+        $query->bindValue(':nis', $nis);
+        $query->bindValue(':cartaosus', $cart_sus);
+        $query->bindValue(':idaluno', $id);
+        $res = $query->execute();
+
+        if(!$res){
+            throw new \PDOException("Falha na gravação");
+            return false;
+        }else{
+            return true;
+        }
+    }
+
+    public static function updateVinculo(){
+
+        $id = filter_input(INPUT_POST,'idaluno', FILTER_SANITIZE_SPECIAL_CHARS);
+        $idcenso = mb_strtoupper(filter_input(INPUT_POST, 'idcenso', FILTER_SANITIZE_SPECIAL_CHARS ));
+        $sige = mb_strtoupper(filter_input(INPUT_POST, 'sige', FILTER_SANITIZE_SPECIAL_CHARS ));
+        $situacao = mb_strtoupper(filter_input(INPUT_POST, 'condicao', FILTER_SANITIZE_SPECIAL_CHARS ));
+        $idturma = mb_strtoupper(filter_input(INPUT_POST, 'turma', FILTER_SANITIZE_SPECIAL_CHARS ));
+        $turma = filter_input(INPUT_POST, 'turma_text', FILTER_SANITIZE_SPECIAL_CHARS );
+        $aluno_enturmado = "SIM";
+
+        $sql = "UPDATE situacao_escolar SET idcenso = :idcenso, sige = :sige, situacao = :situacao, idturma = :idturma, turma = :turma, aluno_enturmado = :aluno_enturmado WHERE idaluno = :idaluno";
+
+        $con = Connection::getConnection();
+
+        $query = $con->prepare($sql);
+        $query->bindValue(':idcenso', $idcenso);
+        $query->bindValue(':sige', $sige);
+        $query->bindValue(':situacao', $situacao);
+        $query->bindValue(':idturma', $idturma);
+        $query->bindValue(':turma', $turma);
+        $query->bindValue(':aluno_enturmado', $aluno_enturmado);
+        $query->bindValue(':idaluno', $id);
+        $res = $query->execute();
+
+        if(!$res){
+            throw new \PDOException("Falha na gravação");
+            return false;
+        }else{
+            return true;
+        }
+    }
+
+    public static function deleteCad(){
+
+        $id = filter_input(INPUT_POST, 'id_cad', FILTER_SANITIZE_SPECIAL_CHARS);
+
+        $sql = "DELETE FROM alunos WHERE id = :id";
+
+        $con = Connection::getConnection();
+
+        $query = $con->prepare($sql);
+        $query->bindValue(':id', $id);
+        $res = $query->execute();
+
+        if($res == false){
+            throw new \PDOException("Falha na gravação");
+            return false;
+        }else{
+            return true;
+        }
+
     }
 
 }

@@ -1,6 +1,6 @@
 <?php
-session_start();
-$id = $_SESSION['idAluno'];
+
+use \app\controllers\Alunos;
 
 ?>
 <script type="text/javascript">
@@ -16,21 +16,22 @@ $id = $_SESSION['idAluno'];
 <div class="container">
     <h2>Situação Escolar</h2>
     <hr>
-    <form action="<?= URL ?>/alunos/gravarVincular/" method="post">
+    <?php foreach ($dados as $row) { ?>
+    <form action="<?= URL ?>/alunos/editarVincular/" method="post">
         <div class="row">
             <div class="col-md-3">
-                <input type="hidden" name="id" value="<?= $id ?>">
+                <input type="hidden" name="idaluno" value="<?= $row['idaluno'] ?>">
                 <label for="idcenso">Id. Censo</label>
-                <input class="form-control" type="text" name="idcenso" id="idcenso" maxlength="12">
+                <input class="form-control" type="text" name="idcenso" id="idcenso" maxlength="12" value="<?= $row['idcenso'] ?>">
             </div>
             <div class="col-md-3">
                 <label for="sige">Sige</label>
-                <input class="form-control" type="text" name="sige" id="sige" maxlength="10">
+                <input class="form-control" type="text" name="sige" id="sige" maxlength="10" value="<?= $row['sige'] ?>">
             </div>
             <div class="col-md-6">
                 <label for="condicao">Situação anterior do aluno</label>
                 <select name="condicao" id="condicao" class="form-control">
-                    <option value="">selecione</option>
+                    <option value="<?= $row['situacao'] ?>"><?= $row['situacao'] ?></option>
                     <option value="APROVADO">Aprovado</option>
                     <option value="REPROVADO">Reprovado</option>
                     <option value="TRANSFERIDO">Transferido</option>
@@ -43,18 +44,19 @@ $id = $_SESSION['idAluno'];
             <div class="col-md-12">
                 <label for="turma">Vincular na turma</label>
                 <select name="turma" id="id_turma" class="form-control" onChange="update()">
-                <option value="0" selected>selecione</option>
-                <?php foreach ($dados as $row) { ?>
-                    <option value="<?php echo $row['id']; ?>"><?php echo $row['nome']; ?></option>
+                <option value="<?= $row['idturma'] ?>"><?= $row['turma'] ?></option>
+                <?php
+                    
+                    $db = new Alunos();
+                    $turmas = $db->readTurma();
+                    foreach ($turmas as $lista) { ?>
+                    <option value="<?php echo $lista['id']; ?>"><?php echo $lista['nome']; ?></option>
                 <?php } ?>
                 </select>
                 <input type="hidden" name="turma_value" id="id_turma_value">
 			    <input type="hidden" name="turma_text" id="id_turma_text">
             </div>
-        </div>
-
-        
-       
+        </div>        
 
         <div class="form-group mt-2">
             <input type="submit" value="Finalizar" name="enviar" class="btn btn-primary">
@@ -62,4 +64,5 @@ $id = $_SESSION['idAluno'];
         </div>
 
     </form>
+    <?php } ?>
 </div>

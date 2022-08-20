@@ -23,7 +23,7 @@ use \app\controllers\Alunos;
                 <th>Nome do aluno</th>
                 <th>Data de nasc.</th>
                 <th>Nome da mãe</th>
-                <th>Ações</th>
+                <th>Editar</th>
             </tr>
         </thead>
         <tbody>
@@ -41,13 +41,13 @@ use \app\controllers\Alunos;
             <tr>
                 <td><?= $row['id'] ?></td>
                 <td><?= $row['nome'] ?></td>
-                <td><?= $row['datadenasc'] ?></td>
+                <td><?= date('d/m/Y', strtotime($row['datadenasc'])) ?></td>
                 <td><?= $row['nomedamae'] ?></td>
                 <td>
                     <a href="<?= URL ?>/alunos/edit/?id=<?php echo base64_encode($row['id']); ?>">Identificação</a> <br>
-                    <a href="<?= URL ?>/alunos/editDados/?id=<?php echo base64_encode($row['id']); ?>">Dados</a> <br>
-                    <a href="<?= URL ?>/alunos/editVinculo/?id=<?php echo base64_encode($row['id']); ?>">Vínculo</a> <br>
-                    <a href="">Excluir</a>
+                    <a href="<?= URL ?>/alunos/editDados/?id=<?php echo base64_encode($row['id']); ?>">Dados do aluno</a> <br>
+                    <a href="<?= URL ?>/alunos/editVinculo/?id=<?php echo base64_encode($row['id']); ?>">Vínculo/Turma</a> <br>
+                    <a href="<?= URL ?>/alunos/delCadastro/?id=<?php echo base64_encode($row['id']); ?>">Excluir</a>
                 </td>
             </tr>
             <?php } } ?>

@@ -77,8 +77,34 @@ class Alunos extends Pages{
         $id = base64_decode(filter_input(INPUT_GET,'id', FILTER_SANITIZE_SPECIAL_CHARS));
         $table = 'alunos';
         $dados = array();
-        $dados = AlunosMd::getIdAluno($id,$table);
+        $dados = AlunosMd::getId($id,$table);
         self::render('alunos/editar-cadastro', $dados);
+    }
+
+    public function editDados(){
+        $id = base64_decode(filter_input(INPUT_GET,'id', FILTER_SANITIZE_SPECIAL_CHARS));
+        $table = 'dados_aluno';
+        $dados = array();
+        $dados = AlunosMd::getIdAluno($id,$table);
+        self::render('alunos/editar-dados', $dados);
+    }
+
+    public function editVinculo(){
+        $id = base64_decode(filter_input(INPUT_GET,'id', FILTER_SANITIZE_SPECIAL_CHARS));
+        //echo "<pre>"; print_r($id); echo "</pre>"; exit;
+        $table = 'situacao_escolar';
+        $dados = array();
+        $dados = AlunosMd::getIdAluno($id,$table);
+        self::render('alunos/editar-vinculo', $dados);
+    }
+
+    public function delCadastro(){
+        $id = base64_decode(filter_input(INPUT_GET,'id', FILTER_SANITIZE_SPECIAL_CHARS));
+        //echo "<pre>"; print_r($id); echo "</pre>"; exit;
+        $table = 'alunos';
+        $dados = array();
+        $dados = AlunosMd::getId($id,$table);
+        self::render('alunos/deletar-cadastro', $dados);
     }
 
     public function editarCad(){
@@ -86,6 +112,48 @@ class Alunos extends Pages{
         try {
             AlunosMd::updateCad($_POST);
             echo '<script>alert("Registro alterado com sucesso!");</script>';
+            echo '<script>location.href=" ' . URL . '/alunos/pesquisarAluno/ "</script>';
+        } catch (\PDOException $e) {
+            echo '<script>alert(" '.$e->getMessage().' ");</script>';
+            echo '<script>location.href=" ' . URL . '/alunos/pesquisarAluno/ "</script>';
+        }
+    }
+
+    public function editarDados(){
+        //echo "<pre>"; print_r($_POST); echo "</pre>"; exit;
+        try {
+            AlunosMd::updateDados($_POST);
+            echo '<script>alert("Registro alterado com sucesso!");</script>';
+            echo '<script>location.href=" ' . URL . '/alunos/pesquisarAluno/ "</script>';
+        } catch (\PDOException $e) {
+            echo '<script>alert(" '.$e->getMessage().' ");</script>';
+            echo '<script>location.href=" ' . URL . '/alunos/pesquisarAluno/ "</script>';
+        }
+    }
+
+    public function editarVincular(){
+        //echo "<pre>"; print_r($_POST); echo "</pre>"; exit;
+        try {
+            AlunosMd::updateVinculo($_POST);
+            echo '<script>alert("Registro alterado com sucesso!");</script>';
+            echo '<script>location.href=" ' . URL . '/alunos/pesquisarAluno/ "</script>';
+        } catch (\PDOException $e) {
+            echo '<script>alert(" '.$e->getMessage().' ");</script>';
+            echo '<script>location.href=" ' . URL . '/alunos/pesquisarAluno/ "</script>';
+        }
+    }
+
+    public function readTurma(){
+        $dados = array();
+        $dados = AlunosMd::read();
+        return $dados;
+    }
+
+    public function deletarRegistro(){
+        //echo "<pre>"; print_r($_POST); echo "</pre>"; exit;
+        try {
+            AlunosMd::deleteCad($_POST);
+            echo '<script>alert("Registro deletado com sucesso!");</script>';
             echo '<script>location.href=" ' . URL . '/alunos/pesquisarAluno/ "</script>';
         } catch (\PDOException $e) {
             echo '<script>alert(" '.$e->getMessage().' ");</script>';
