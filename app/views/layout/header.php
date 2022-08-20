@@ -21,9 +21,34 @@
             </button>
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
           <div class="navbar-nav">
-            <a class="nav-link active" aria-current="page" href="<?= URL ?>/alunos/pesquisarAluno/">Alunos</a>
-            <a class="nav-link active" aria-current="page" href="<?= URL ?>/turmas/index/">Turmas</a>
-            <a class="nav-link active" aria-current="page" href="#">Enturmação</a>
+            <li class="nav-item dropdown">
+              <a class="nav-link active dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Cadastros
+              </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <li><a class="dropdown-item" href="<?= URL ?>/alunos/pesquisarAluno/">Alunos</a></li>
+              <li><a class="dropdown-item" href="<?= URL ?>/turmas/index/">Turmas</a></li>
+              <li><a class="dropdown-item" href="#">Professores</a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a class="dropdown-item" href="#">Sair</a></li>
+            </ul>
+          </li>
+
+          <li class="nav-item dropdown">
+              <a class="nav-link active dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Matrícula
+              </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <li><a class="dropdown-item" href="<?= URL ?>/alunos/pesquisarAluno">Pesquisar aluno</a></li>
+              <li><a class="dropdown-item" href="#">Consultar Turmas</a></li>
+              <li><a class="dropdown-item" href="#">Alunos NEE</a></li>
+              <li><a class="dropdown-item" href="#">Transferidos</a></li>
+              <li><a class="dropdown-item" href="#">Transp. Escolar</a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a class="dropdown-item" href="#">Sair</a></li>
+            </ul>
+          </li>
+
           </div>
         </div>
       </div>

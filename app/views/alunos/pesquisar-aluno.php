@@ -12,7 +12,7 @@ use \app\controllers\Alunos;
             <input class="form-control me-2" type="search" placeholder="pesquisar aluno" aria-label="Search" name="nome" size="50">
             <input class="btn btn-primary me-2" type="submit" name="pesquisar" value="Pesquisar">
             <a class="btn btn-primary me-2" href="<?= URL ?>/alunos/cadastrar/">Cadastrar</a>
-            <a class="btn btn-warning" href="">Voltar</a>
+            <a class="btn btn-warning" href="<?= URL ?>">Voltar</a>
         </form>
         </div>
     </nav>

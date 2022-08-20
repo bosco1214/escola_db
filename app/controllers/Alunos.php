@@ -28,6 +28,7 @@ class Alunos extends Pages{
     public function gravarCadastro(){
        try {
         AlunosMd::create($_POST);
+        //echo '<script>alert("Registro gravado com sucesso!");</script>';
         echo '<script>alert("Registro gravado com sucesso!");</script>';
         echo '<script>location.href=" ' . URL . '/alunos/dadosAluno/ "</script>';
         } catch (\PDOException $e) {
