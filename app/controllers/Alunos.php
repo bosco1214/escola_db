@@ -22,13 +22,14 @@ class Alunos extends Pages{
     }
 
     public function dadosAluno2(){
-        self::render('alunos/dados-aluno-2');
+        $dados = array();
+        $dados = AlunosMd::getLastId();
+        self::render('alunos/dados-aluno-2',$dados);
     }
 
     public function gravarCadastro(){
        try {
         AlunosMd::create($_POST);
-        //echo '<script>alert("Registro gravado com sucesso!");</script>';
         echo '<script>alert("Registro gravado com sucesso!");</script>';
         echo '<script>location.href=" ' . URL . '/alunos/dadosAluno/ "</script>';
         } catch (\PDOException $e) {
@@ -40,10 +41,9 @@ class Alunos extends Pages{
     public function gravarDados(){
         try {
         AlunosMd::addData($_POST);
-        $dados = array();
-        $dados = AlunosMd::read();
         echo '<script>alert("Registro gravado com sucesso!");</script>';
-        self::render('alunos/dados-aluno-2', $dados);
+        //self::render('alunos/dados-aluno-2', $dados);
+        echo '<script>location.href=" ' . URL . '/alunos/dadosAluno2/ "</script>';
         } catch (\PDOException $e) {
         echo '<script>alert(" '.$e->getMessage().' ");</script>';
         echo '<script>location.href=" ' . URL . '/alunos/dadosAluno/ "</script>';
@@ -54,7 +54,7 @@ class Alunos extends Pages{
         try {
             AlunosMd::vincular($_POST);
             echo '<script>alert("Registro gravado com sucesso!");</script>';
-            echo '<script>location.href=" ' . URL . ' "</script>';
+            echo '<script>location.href=" ' . URL . '/enturmar/index/ "</script>';
             } catch (\PDOException $e) {
             echo '<script>alert(" '.$e->getMessage().' ");</script>';
             echo '<script>location.href=" ' . URL . '/alunos/dadosAluno2/ "</script>';

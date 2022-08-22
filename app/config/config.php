@@ -2,7 +2,7 @@
 
 define('APP', dirname(__FILE__));
 define('URL','http://localhost/escola_db');
-define('APP_NOME','escola_db');
+define('APP_NOME','SISESCOLA-PRO');
 
 //imagens
 define('IMG','http://localhost/escola_db/app/assets/img/logohome.jpg');

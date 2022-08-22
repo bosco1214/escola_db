@@ -26,11 +26,12 @@
                 Cadastros
               </a>
             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <li><a class="dropdown-item" href="<?= URL ?>/alunos/pesquisarAluno/">Alunos</a></li>
+              <li><a class="dropdown-item" href="<?= URL ?>/alunos/cadastrar/">Alunos</a></li>
               <li><a class="dropdown-item" href="<?= URL ?>/turmas/index/">Turmas</a></li>
               <li><a class="dropdown-item" href="#">Professores</a></li>
+              <li><a class="dropdown-item" href="#">Funcionários</a></li>
               <li><hr class="dropdown-divider"></li>
-              <li><a class="dropdown-item" href="#">Sair</a></li>
+              <li><a class="dropdown-item" href="<?= URL ?>/site/exit/">Sair</a></li>
             </ul>
           </li>
 
@@ -40,12 +41,42 @@
               </a>
             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
               <li><a class="dropdown-item" href="<?= URL ?>/alunos/pesquisarAluno">Pesquisar aluno</a></li>
-              <li><a class="dropdown-item" href="#">Consultar Turmas</a></li>
+              <li><a class="dropdown-item" href="<?= URL ?>/enturmar/enturmarAluno">Enturmar aluno</a></li>
+              <li><a class="dropdown-item" href="#">Turmas</a></li>
               <li><a class="dropdown-item" href="#">Alunos NEE</a></li>
               <li><a class="dropdown-item" href="#">Transferidos</a></li>
               <li><a class="dropdown-item" href="#">Transp. Escolar</a></li>
+              <li><a class="dropdown-item" href="#">Contato</a></li>
+            </ul>
+          </li>
+
+          <li class="nav-item dropdown">
+              <a class="nav-link active dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Acadêmico
+              </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <li><a class="dropdown-item" href="#">Período Letivo</a></li>
+              <li><a class="dropdown-item" href="#">Avaliação</a></li>
+              <li><a class="dropdown-item" href="#">Resultado Final</a></li>
+              <li><a class="dropdown-item" href="#">Histórico Escolar</a></li>
               <li><hr class="dropdown-divider"></li>
-              <li><a class="dropdown-item" href="#">Sair</a></li>
+              <li><a class="dropdown-item" href="#">Sige Escola</a></li>
+              <li><a class="dropdown-item" href="#">Educacenso</a></li>
+            </ul>
+          </li>
+
+          <li class="nav-item dropdown">
+              <a class="nav-link active dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Relatório
+              </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <li><a class="dropdown-item" href="#">Ficha de Matrícula</a></li>
+              <li><a class="dropdown-item" href="#">Declaração</a></li>
+              <li><a class="dropdown-item" href="#">Aut. Imagem</a></li>
+              <li><a class="dropdown-item" href="#">Freq. Sala</a></li>
+              <li><a class="dropdown-item" href="#">Req. Transferência</a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a class="dropdown-item" href="#">Histórico Escolar</a></li>
             </ul>
           </li>
 

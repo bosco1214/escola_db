@@ -1,9 +1,7 @@
 <?php
 
 $id = $dados['id'];
-
-session_start();
-$_SESSION['idAluno'] = $id;
+$nome = $dados['nome'];
 
 ?>
 <div class="container">
@@ -13,6 +11,7 @@ $_SESSION['idAluno'] = $id;
         <div class="row">
             <div class="col-md-6">
                 <input type="hidden" name="id" value="<?= $id ?>">
+                <input type="hidden" name="nome" value="<?= $nome ?>">
                 <label for="certidao">Certidão de nascimento</label>
                 <input class="form-control" type="text" name="certidao" id="certidao" placeholder="certidão de nascimento">
             </div>

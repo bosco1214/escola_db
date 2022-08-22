@@ -41,7 +41,7 @@ use \app\controllers\Alunos;
         </div>
 
         <div class="row">
-            <div class="col-md-12">
+            <div class="col-md-8">
                 <label for="turma">Vincular na turma</label>
                 <select name="turma" id="id_turma" class="form-control" onChange="update()">
                 <option value="<?= $row['idturma'] ?>"><?= $row['turma'] ?></option>
@@ -56,7 +56,20 @@ use \app\controllers\Alunos;
                 <input type="hidden" name="turma_value" id="id_turma_value">
 			    <input type="hidden" name="turma_text" id="id_turma_text">
             </div>
-        </div>        
+            <div class="col-md-2">
+                <label for="turma">Aluno enturmado</label>
+                <select name="aluno_enturmado" id="aluno_enturmado" class="form-control">
+                <option value="<?= $row['aluno_enturmado'] ?>"><?= $row['aluno_enturmado'] ?></option>
+                    <option value="SIM">SIM</option>
+                    <option value="NAO">NÃO</option>
+                </select>
+            </div>
+            <div class="col-md-2">
+                <label for="turma">Ano letivo</label>
+                <input class="form-control" type="text" name="anoletivo" id="anoletivo" value="<?= $row['anoletivo'] ?>" maxlength="4">
+            </div>
+        </div> 
+              
 
         <div class="form-group mt-2">
             <input type="submit" value="Finalizar" name="enviar" class="btn btn-primary">

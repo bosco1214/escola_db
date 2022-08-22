@@ -51,6 +51,7 @@ class AlunosMd {
     public static function addData(){
 
         $id = filter_input(INPUT_POST,'id', FILTER_SANITIZE_SPECIAL_CHARS);
+        $nome = filter_input(INPUT_POST,'nome', FILTER_SANITIZE_SPECIAL_CHARS);
         $certidao = mb_strtoupper(filter_input(INPUT_POST, 'certidao', FILTER_SANITIZE_SPECIAL_CHARS ));
         $rg_aluno = mb_strtoupper(filter_input(INPUT_POST, 'rg_aluno', FILTER_SANITIZE_SPECIAL_CHARS ));
         $cpf_aluno = mb_strtoupper(filter_input(INPUT_POST, 'cpf_aluno', FILTER_SANITIZE_SPECIAL_CHARS ));
@@ -66,12 +67,13 @@ class AlunosMd {
         $nis = mb_strtoupper(filter_input(INPUT_POST, 'nis', FILTER_SANITIZE_SPECIAL_CHARS ));
         $cart_sus = filter_input(INPUT_POST, 'cart_sus', FILTER_SANITIZE_SPECIAL_CHARS );
 
-        $sql = "INSERT INTO dados_aluno (idaluno,certidao,rg_aluno,cpf_aluno,contato1,contato2,email,endereco,bairro,cep,cidade,transpescolar,bolsafamilia,nis,cartaosus) VALUES (:idaluno,:certidao,:rg_aluno,:cpf_aluno,:contato1,:contato2,:email,:endereco,:bairro,:cep,:cidade,:transpescolar,:bolsafamilia,:nis,:cartaosus)";
+        $sql = "INSERT INTO dados_aluno (idaluno,nomedoaluno,certidao,rg_aluno,cpf_aluno,contato1,contato2,email,endereco,bairro,cep,cidade,transpescolar,bolsafamilia,nis,cartaosus) VALUES (:idaluno,:nomedoaluno,:certidao,:rg_aluno,:cpf_aluno,:contato1,:contato2,:email,:endereco,:bairro,:cep,:cidade,:transpescolar,:bolsafamilia,:nis,:cartaosus)";
 
         $con = Connection::getConnection();
 
         $query = $con->prepare($sql);
         $query->bindValue(':idaluno', $id);
+        $query->bindValue(':nomedoaluno', $nome);
         $query->bindValue(':certidao', $certidao);
         $query->bindValue(':rg_aluno', $rg_aluno);
         $query->bindValue(':cpf_aluno', $cpf_aluno);
@@ -99,25 +101,29 @@ class AlunosMd {
     public static function vincular(){
 
         $id = filter_input(INPUT_POST,'id', FILTER_SANITIZE_SPECIAL_CHARS);
+        $nome = filter_input(INPUT_POST,'nome', FILTER_SANITIZE_SPECIAL_CHARS );
         $idcenso = mb_strtoupper(filter_input(INPUT_POST, 'idcenso', FILTER_SANITIZE_SPECIAL_CHARS ));
         $sige = mb_strtoupper(filter_input(INPUT_POST, 'sige', FILTER_SANITIZE_SPECIAL_CHARS ));
         $situacao = mb_strtoupper(filter_input(INPUT_POST, 'condicao', FILTER_SANITIZE_SPECIAL_CHARS ));
         $idturma = mb_strtoupper(filter_input(INPUT_POST, 'turma', FILTER_SANITIZE_SPECIAL_CHARS ));
         $turma = filter_input(INPUT_POST, 'turma_text', FILTER_SANITIZE_SPECIAL_CHARS );
-        $aluno_enturmado = "SIM";
+        $aluno_enturmado = "NAO";
+        $anoletivo = date('Y');
 
-        $sql = "INSERT INTO situacao_escolar (idaluno,idcenso,sige,situacao,idturma,turma,aluno_enturmado) VALUES (:idaluno, :idcenso, :sige, :situacao, :idturma, :turma, :aluno_enturmado)";
+        $sql = "INSERT INTO situacao_escolar (idaluno,nomedoaluno,idcenso,sige,situacao,idturma,turma,aluno_enturmado,anoletivo) VALUES (:idaluno, :nomedoaluno,:idcenso, :sige, :situacao, :idturma, :turma, :aluno_enturmado,:anoletivo)";
 
         $con = Connection::getConnection();
 
         $query = $con->prepare($sql);
         $query->bindValue(':idaluno', $id);
+        $query->bindValue(':nomedoaluno', $nome);
         $query->bindValue(':idcenso', $idcenso);
         $query->bindValue(':sige', $sige);
         $query->bindValue(':situacao', $situacao);
         $query->bindValue(':idturma', $idturma);
         $query->bindValue(':turma', $turma);
         $query->bindValue(':aluno_enturmado', $aluno_enturmado);
+        $query->bindValue(':anoletivo', $anoletivo);
         $res = $query->execute();
 
         if(!$res){
@@ -151,7 +157,7 @@ class AlunosMd {
 
         $query = $con->prepare($sql);
         $query->execute();
-        $resultado = $query->fetch();
+        $resultado = $query->fetch(\PDO::FETCH_ASSOC);
         return $resultado;
     }
 
@@ -309,9 +315,9 @@ class AlunosMd {
         $situacao = mb_strtoupper(filter_input(INPUT_POST, 'condicao', FILTER_SANITIZE_SPECIAL_CHARS ));
         $idturma = mb_strtoupper(filter_input(INPUT_POST, 'turma', FILTER_SANITIZE_SPECIAL_CHARS ));
         $turma = filter_input(INPUT_POST, 'turma_text', FILTER_SANITIZE_SPECIAL_CHARS );
-        $aluno_enturmado = "SIM";
+        //$aluno_enturmado = "SIM";
 
-        $sql = "UPDATE situacao_escolar SET idcenso = :idcenso, sige = :sige, situacao = :situacao, idturma = :idturma, turma = :turma, aluno_enturmado = :aluno_enturmado WHERE idaluno = :idaluno";
+        $sql = "UPDATE situacao_escolar SET idcenso = :idcenso, sige = :sige, situacao = :situacao, idturma = :idturma, turma = :turma WHERE idaluno = :idaluno";
 
         $con = Connection::getConnection();
 
@@ -321,7 +327,7 @@ class AlunosMd {
         $query->bindValue(':situacao', $situacao);
         $query->bindValue(':idturma', $idturma);
         $query->bindValue(':turma', $turma);
-        $query->bindValue(':aluno_enturmado', $aluno_enturmado);
+        //$query->bindValue(':aluno_enturmado', $aluno_enturmado);
         $query->bindValue(':idaluno', $id);
         $res = $query->execute();
 

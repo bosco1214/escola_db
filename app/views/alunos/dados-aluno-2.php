@@ -1,6 +1,7 @@
 <?php
-session_start();
-$id = $_SESSION['idAluno'];
+
+$id = $dados['id'];
+$nome = $dados['nome'];
 
 ?>
 <script type="text/javascript">
@@ -20,6 +21,7 @@ $id = $_SESSION['idAluno'];
         <div class="row">
             <div class="col-md-3">
                 <input type="hidden" name="id" value="<?= $id ?>">
+                <input type="hidden" name="nome" value="<?= $nome ?>">
                 <label for="idcenso">Id. Censo</label>
                 <input class="form-control" type="text" name="idcenso" id="idcenso" maxlength="12">
             </div>
@@ -44,7 +46,11 @@ $id = $_SESSION['idAluno'];
                 <label for="turma">Vincular na turma</label>
                 <select name="turma" id="id_turma" class="form-control" onChange="update()">
                 <option value="0" selected>selecione</option>
-                <?php foreach ($dados as $row) { ?>
+                <?php 
+                use \app\controllers\Alunos;
+                $db = new Alunos();
+                $turmas = $db->readTurma();
+                foreach ($turmas as $row) { ?>
                     <option value="<?php echo $row['id']; ?>"><?php echo $row['nome']; ?></option>
                 <?php } ?>
                 </select>
