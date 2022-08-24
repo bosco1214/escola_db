@@ -109,4 +109,57 @@ class EnturmarMd {
         $query->bindValue(':aluno_enturmado', "SIM");
         $query->execute();
     }
+
+    public static function getTurmas(){
+        $sql = "SELECT * FROM turmas WHERE anoletivo = :anoletivo ORDER BY nome";
+
+        $con = Connection::getConnection();
+
+        $query = $con->prepare($sql);
+        $query->bindValue(':anoletivo', date('Y'));
+        $query->execute();
+        $count = $query->rowCount();
+
+        if($count == 0){
+            throw new \PDOException("Error Processing Request");
+            return false;
+        }else{
+            $resultado = $query->fetchAll(\PDO::FETCH_ASSOC);
+            return $resultado;
+        }
+    }
+
+    public static function getEnturmacao($id){
+
+        $idturma = $id;
+        $sql = "SELECT
+        ent.id,
+        ent.idaluno,
+        ent.nome,
+        ent.idturma,
+        ent.turma,
+        ent.numero,
+        alu.id,
+        alu.sexo,
+        alu.datadenasc,
+        alu.nomedamae,
+        alu.data_cadastro,
+        ent.anoletivo FROM enturmacao ent
+        INNER JOIN alunos alu ON ent.idaluno = alu.id
+        WHERE ent.idturma = :idturma ORDER BY ent.numero, alu.nome";
+
+        $con = Connection::getConnection();
+
+        $query = $con->prepare($sql);
+        $query->bindValue(':idturma', $idturma);
+        $query->execute();
+        $count = $query->rowCount();
+
+        if($count == 0){
+            return false;
+        }else{
+            $resultado = $query->fetchAll(\PDO::FETCH_ASSOC);
+            return $resultado;
+        }
+    }
 }

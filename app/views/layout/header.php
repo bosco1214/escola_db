@@ -42,7 +42,7 @@
             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
               <li><a class="dropdown-item" href="<?= URL ?>/alunos/pesquisarAluno">Pesquisar aluno</a></li>
               <li><a class="dropdown-item" href="<?= URL ?>/enturmar/enturmarAluno">Enturmar aluno</a></li>
-              <li><a class="dropdown-item" href="#">Turmas</a></li>
+              <li><a class="dropdown-item" href="<?= URL ?>/consultas/index">Turmas</a></li>
               <li><a class="dropdown-item" href="#">Alunos NEE</a></li>
               <li><a class="dropdown-item" href="#">Transferidos</a></li>
               <li><a class="dropdown-item" href="#">Transp. Escolar</a></li>
